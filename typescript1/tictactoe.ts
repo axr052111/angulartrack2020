@@ -36,8 +36,7 @@ class Tictactoe implements ITictactoe {
   }
 
   drawBoard() {
-    const canvas = <HTMLCanvasElement>document.getElementById("myCanvas");
-    const ctx = canvas.getContext("2d");
+    const ctx = this.canvas.getContext("2d");
     ctx.strokeStyle = "black";
 
     this.board.forEach(square => {
@@ -53,7 +52,7 @@ class Tictactoe implements ITictactoe {
     let y = Math.floor(e.offsetY / SQUARESIZE);
 
     const square = this.board.find(sq => sq.x === x && sq.y === y);
-    square.fillContent(this.playerToMove);
+    square.fillContent(this.playerToMove, this.canvas, SQUARESIZE);
     // determine the coordinates of the cell the user clicked.
     // for that square, call fillContent.
     // Change the playerToMove.

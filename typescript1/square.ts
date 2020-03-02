@@ -9,8 +9,16 @@ class Square implements ISquare {
     console.log (this.x, this.y);
   }
 
-  fillContent(move: Move): void {
+  fillContent(move: Move, canvas: HTMLCanvasElement, squaresize: number): void {
     this.content = move;
+    
+    const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "red";
+
+    const offset = squaresize / 2;
+    ctx.beginPath();    
+    ctx.arc(this.x * squaresize + offset, this.y * squaresize + offset, 0.4 * squaresize, 0, 2 * Math.PI);
+    ctx.stroke();
   }
 
   getContent(): Move {
