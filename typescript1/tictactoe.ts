@@ -13,6 +13,12 @@ interface ITictactoe {
 class Tictactoe implements ITictactoe {
   playerToMove: Move;
   board: Square[] = [];
+  canvas: HTMLCanvasElement;
+
+  constructor() {
+    this.canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
+    this.canvas.addEventListener("click", this.handleClick.bind(this));
+  }
 
   newGame() {
     // this.playerToMove = Math.round(Math.random())
@@ -32,27 +38,37 @@ class Tictactoe implements ITictactoe {
   drawBoard() {
     const canvas = <HTMLCanvasElement>document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
-    ctx.strokeStyle = 'black';
-    
+    ctx.strokeStyle = "black";
+
     this.board.forEach(square => {
       const startX = square.x * SQUARESIZE;
       const startY = square.y * SQUARESIZE;
       ctx.strokeRect(startX, startY, SQUARESIZE, SQUARESIZE);
-    });    
+    });
+  }
+
+  handleClick(e: MouseEvent) {
+    console.log(`user clicked in ${e.offsetX} , ${e.offsetY}`);
+    let x = Math.floor(e.offsetX / SQUARESIZE);
+    let y = Math.floor(e.offsetY / SQUARESIZE);
+
+    const square = this.board.find(sq => sq.x === x && sq.y === y);
+    square.fillContent(this.playerToMove);
+    // determine the coordinates of the cell the user clicked.
+    // for that square, call fillContent.
+    // Change the playerToMove.
+    // bonus: check win condition
+    // bonus: add a text of who is the winner
+    // bonus: add a move counter
+    // bonus: be creative.
   }
 
   private logState() {
     console.log(`Player to move: ${this.playerToMove}`);
-    console.log('The board: '+ this.board);
+    console.log("The board: " + this.board);
   }
 }
 
-var game = new Tictactoe();
+const game = new Tictactoe();
 game.newGame();
 game.drawBoard();
-// Click handler
-
-
-
-
-
