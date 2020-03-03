@@ -7,7 +7,7 @@ import { SpaceshiplistComponent } from './spaceshiplist/spaceshiplist.component'
   declarations: [SpaceshipComponent, SpaceshiplistComponent],
   exports: [SpaceshipComponent, SpaceshiplistComponent],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class StarWarsModule { }
