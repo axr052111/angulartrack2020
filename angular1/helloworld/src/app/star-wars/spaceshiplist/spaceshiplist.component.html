@@ -1,5 +1,3 @@
 <p>spaceshiplist works!</p>
 
-<div *ngFor="let ship of spaceships">
-  <app-spaceship [spaceship]="ship"></app-spaceship>
-</div>
+  <app-spaceship [spaceship]="ship" *ngFor="let ship of spaceships"></app-spaceship>
